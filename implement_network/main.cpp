@@ -24,6 +24,6 @@ int main()
 	//float GT[6] = { -0.10585209,0.06931,0.150405};
 	//for (int i = 0; i < 3*N; i++) {
 	//	cout << result[i] << "   " << GT[i/N] << endl;
-	//}
+	//}//
 	system("pause");
 }
