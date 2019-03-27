@@ -8,6 +8,7 @@
 #include <cuda_runtime.h>
 #include <cublas_v2.h>
 #include<device_launch_parameters.h>
+#include <windows.h>
 using namespace std;
 class Network
 {

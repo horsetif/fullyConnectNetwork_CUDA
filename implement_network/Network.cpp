@@ -236,6 +236,7 @@ float *Network::run_network(float *input) {
 	cudaMalloc((void**)&d_input, sizeof(float) * 6 * _total_num);
 	cudaMemcpy(d_input, input, sizeof(float) * 6 * _total_num, cudaMemcpyHostToDevice);
 
+	double start = GetTickCount();
 	float *layer_0 = matrixMultiply_GPU(d_weight0, d_input, 64, _total_num, 6);
 	float *layer_0_relu = broadcast_relu_GPU(layer_0,d_bias0, 64, _total_num, 0);
 
@@ -247,6 +248,9 @@ float *Network::run_network(float *input) {
 
 	float *layer_3 = matrixMultiply_GPU(d_weight3, layer_2_relu, 3, _total_num, 64);
 	float *layer_3_bd = broadcast_GPU(layer_3, d_bias3, 3, _total_num);
+
+	double  end = GetTickCount();
+	cout << "GetTickCount only calculate:  " << end - start << endl << endl << endl;
 
 	float *layer_3_CPU = (float *)malloc(sizeof(float) * 3 * _total_num);
 	cudaMemcpy(layer_3_CPU, layer_3_bd, sizeof(float) * 3 * _total_num, cudaMemcpyDeviceToHost);
